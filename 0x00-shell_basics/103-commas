@@ -1,2 +1,2 @@
 #!/bin/bash
-ls -ma
+find . -type f -ls | sort -n -r
