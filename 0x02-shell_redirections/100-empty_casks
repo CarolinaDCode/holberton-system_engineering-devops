@@ -1,2 +1,2 @@
 #!/bin/bash
-find . -type f d -name -la
+find . -type f,d -name -la
