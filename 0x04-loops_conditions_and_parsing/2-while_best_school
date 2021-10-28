@@ -2,7 +2,8 @@
 # Write a Bash script that displays Best School 10 times.
 
 i=0;
-while ((i < 10)); do
-      echo 'Best School'
-      let i++
-      done
+while [ $i -lt 10 ]
+do
+    echo "Best School"
+    i=$((i + 1))
+done
