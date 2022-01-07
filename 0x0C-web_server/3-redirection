@@ -2,7 +2,7 @@
 # Redirect
 SU=$(whoami)
 DIR="/etc/nginx/sites-available/default"
-NEW_URL="https://twitter.com/Luffy_981"
+NEW_URL="https://www.youtube.com/watch?v=snehh-hXoY8"
 OLD_URL="/redirect_me"
 REDIRECT="\tlocation ${OLD_URL} {\n\t\treturn 301 ${NEW_URL};\n\t}"
 
