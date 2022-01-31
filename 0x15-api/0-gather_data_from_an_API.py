@@ -1,13 +1,13 @@
 #!/usr/bin/python3
-""" Returns information about his/her TODO list progress.
-"""
+'''
+Returns information about his/her list progress.
+'''
 import requests
-import sys
-
+from sys import argv
 if __name__ == "__main__":
     url = "https://jsonplaceholder.typicode.com/"
-    user = requests.get(url + "users/{}".format(sys.argv[1])).json()
-    todos = requests.get(url + "todos", params={"userId": sys.argv[1]}).json()
+    user = requests.get(url + "users/{}".format(argv[1])).json()
+    todos = requests.get(url + "users/{}/todos".format(argv[1])).json()
 
     completed = []
     for task in todos:
