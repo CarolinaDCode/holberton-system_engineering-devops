@@ -18,7 +18,7 @@ if __name__ == "__main__":
         'https://jsonplaceholder.typicode.com/todos').json()
     get_user = requests.get(
         'https://jsonplaceholder.typicode.com/users').json()
-    
+
     print('Employee ', end='')
 
     for user in get_user:
@@ -32,11 +32,11 @@ if __name__ == "__main__":
 
             conf_task = todo.get('completed')
             if conf_task is True:
-               NUMBER_OF_DONE_TASKS += 1
-               TASK_TITLE.append(todo.get('title'))
+                NUMBER_OF_DONE_TASKS += 1
+                TASK_TITLE.append(todo.get('title'))
 
     print('{} is done with tasks({}/{})'.format(
         EMPLOYEE_NAME, NUMBER_OF_DONE_TASKS, TOTAL_NUMBER_OF_TASKS))
-    
+
     for title in TASK_TITLE:
         print('\t {}'.format(title))
