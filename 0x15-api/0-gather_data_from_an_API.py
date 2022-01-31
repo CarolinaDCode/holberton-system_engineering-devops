@@ -10,9 +10,9 @@ from sys import argv
 if __name__ == "__main__":
     id_user = int(argv[1])
 
-    NUMBER_OF_DONE_TASKS = 0
-    TOTAL_NUMBER_OF_TASKS = 0
-    TASK_TITLE = []
+    number_of_done_tasks = 0
+    total_number_of_tasks = 0
+    task_title = []
 
     get_todos = requests.get(
         'https://jsonplaceholder.typicode.com/todos').json()
@@ -23,20 +23,20 @@ if __name__ == "__main__":
 
     for user in get_user:
         if id_user == user.get('id'):
-            EMPLOYEE_NAME = user.get('name')
+            employee_name = user.get('name')
 
     for todo in get_todos:
         total_task = todo.get('userId')
         if total_task == id_user:
-            TOTAL_NUMBER_OF_TASKS += 1
+            total_number_of_tasks += 1
 
             conf_task = todo.get('completed')
             if conf_task is True:
-                NUMBER_OF_DONE_TASKS += 1
-                TASK_TITLE.append(todo.get('title'))
+                number_of_done_tasks += 1
+                task_title.append(todo.get('title'))
 
     print('{} is done with tasks({}/{})'.format(
-        EMPLOYEE_NAME, NUMBER_OF_DONE_TASKS, TOTAL_NUMBER_OF_TASKS))
+        employee_name, number_of_done_tasks, total_number_of_tasks))
 
-    for title in TASK_TITLE:
+    for title in task_title:
         print('\t {}'.format(title))
