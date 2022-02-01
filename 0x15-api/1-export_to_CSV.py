@@ -7,7 +7,6 @@ if __name__ == "__main__":
     url = "https://jsonplaceholder.typicode.com/"
     user = requests.get(url + "users/{}".format(argv[1])).json()
     todos = requests.get(url + "users/{}/todos".format(argv[1])).json()
-    name_user = user['name']
 
     with open("{}.csv".format(argv[1]), "w", newline="") as csv_file:
         tasks = csv.writer(csv_file, quoting=csv.QUOTE_ALL)
