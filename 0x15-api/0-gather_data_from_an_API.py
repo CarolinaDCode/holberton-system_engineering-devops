@@ -12,12 +12,6 @@ if __name__ == "__main__":
     task_completed = 0
     total_task = 0
 
-    # employeeID = argv[1]
-    # url = 'https://jsonplaceholder.typicode.com/users/{}/'.format(employeeID)
-    # employee = requests.get(url)
-    # name = employee.json()['name']
-    # print(name)
-
     for task in todos:
         total_task += 1
         if task.get('completed'):
