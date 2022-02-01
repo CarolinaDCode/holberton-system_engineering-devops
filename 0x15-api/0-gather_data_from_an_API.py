@@ -1,24 +1,29 @@
 #!/usr/bin/python3
 '''
-Returns information about his/her list progress.
+Consume API with Python
 '''
 import requests
 from sys import argv
 if __name__ == "__main__":
-    url = "https://jsonplaceholder.typicode.com/"
-    user = requests.get(url + "users/{}".format(argv[1])).json()
-    todos = requests.get(url + "users/{}/todos".format(argv[1])).json()
-    name_user = user['name']
-    task_completed = 0
-    total_task = 0
+    employeeID = argv[1]
 
-    for task in todos:
-        total_task += 1
-        if task.get('completed'):
-            task_completed += 1
-    print('Employee {} is done with tasks({:d}/{:d}):'
-          .format(name_user, task_completed, total_task))
+    url = 'https://jsonplaceholder.typicode.com/users/{}/'.format(employeeID)
+    employee = requests.get(url)
 
-    for task in todos:
-        if task.get('completed'):
-            print('\t {}'.format(task['title']))
+    route = 'https://jsonplaceholder.typicode.com/users/{}/todos'
+    url = route.format(employeeID)
+    todoByEmployee = requests.get(url)
+
+    name = employee.json()['name']
+    completed = 0
+    tasks = 0
+
+    for i in todoByEmployee.json():
+        tasks += 1
+        if i['completed']:
+            completed += 1
+    text = 'Employee {} is done with tasks({:d}/{:d}):'
+    print(text.format(name, completed, tasks))
+    for i in todoByEmployee.json():
+        if i['completed']:
+            print('\t {}'.format(i['title']))
