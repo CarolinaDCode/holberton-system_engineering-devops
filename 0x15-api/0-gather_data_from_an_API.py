@@ -12,14 +12,19 @@ if __name__ == "__main__":
     task_completed = 0
     total_task = 0
 
+    # employeeID = argv[1]
+    # url = 'https://jsonplaceholder.typicode.com/users/{}/'.format(employeeID)
+    # employee = requests.get(url)
+    # name = employee.json()['name']
+    # print(name)
+
     for task in todos:
         total_task += 1
         if task.get('completed'):
             task_completed += 1
-    print('Employee {} is done  with tasks({:d}/{:d}):'
+    print('Employee {} is done with tasks({:d}/{:d}):'
           .format(name_user, task_completed, total_task))
 
     for task in todos:
         if task.get('completed'):
-            print('\t ' + task['title'])
-            # print("\t {}".format(task.get['title']))
+            print('\t {}'.format(task['title']))
