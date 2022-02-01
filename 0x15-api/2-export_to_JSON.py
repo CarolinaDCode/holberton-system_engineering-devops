@@ -12,12 +12,12 @@ if __name__ == "__main__":
 
     tasks = []
     for task in todos:
-        json_format = {}
-        json_format["task"] = task.get("title")
-        json_format["completed"] = task.get("completed")
-        json_format["username"] = name_user
-        tasks.append(json_format)
-        json_tasks_format = {}
-        json_tasks_format[argv[1]] = tasks
-    with open("{}.json".format(argv[1]), "w") as json_file:
-        json.dump(json_tasks_format, json_file)
+        task_dict = {}
+        task_dict["task"] = task.get('title')
+        task_dict["completed"] = task.get('completed')
+        task_dict["username"] = name_user
+        tasks.append(task_dict)
+    jsonobj = {}
+    jsonobj[argv[1]] = tasks
+    with open("{}.json".format(argv[1]), 'w') as jsonfile:
+        json.dump(jsonobj, jsonfile)
