@@ -9,7 +9,9 @@ import operator
 
 def count_words(subreddit, word_list=[], word_dict={}, after=None):
     headers = {
-        'User-Agent': 'Chrome/98.0.4758.102'}
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_2) Apple' +
+        'WebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36'
+    }
     r = requests.get('https://www.reddit.com/r/{:}/hot.json?after={:}'.format(
         subreddit, after), headers=headers, allow_redirects=False)
     if r.status_code == 200:
