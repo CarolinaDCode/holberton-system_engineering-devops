@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """
 Write a function that queries the Reddit API and
-returns the number of subscribers 
+returns the number of subscribers
 """
 import json
 import requests
