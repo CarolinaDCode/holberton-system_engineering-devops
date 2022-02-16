@@ -1,47 +1,45 @@
 #!/usr/bin/python3
-"""Module for task 3"""
+# get subs
+from requests import get
+from sys import argv
+
+hotlist = []
+after = None
 
 
-def count_words(subreddit, word_list, word_count={}, after=None):
-    """Queries the Reddit API and returns the count of words in
-    word_list in the titles of all the hot posts
-    of the subreddit"""
-    import requests
+def count_all(hotlist, word_list):
+    count_dic = {word.lower(): 0 for word in word_list}
+    for title in hotlist:
+        words = title.split(' ')
+        for word in words:
+            if count_dic.get(word) is not None:
+                count_dic[word] += 1
 
-    sub_info = requests.get("https://www.reddit.com/r/{}/hot.json"
-                            .format(subreddit),
-                            params={"after": after},
-                            headers={"User-Agent": "My-User-Agent"},
-                            allow_redirects=False)
-    if sub_info.status_code != 200:
-        return None
+    for key in sorted(count_dic, key=count_dic.get, reverse=True):
+        if count_dic.get(key):
+            for thing in word_list:
+                if key == thing.lower():
+                    print("{}: {}".format(thing, count_dic[key]))
 
-    info = sub_info.json()
 
-    hot_l = [child.get("data").get("title")
-             for child in info
-             .get("data")
-             .get("children")]
-    if not hot_l:
-        return None
-
-    word_list = list(dict.fromkeys(word_list))
-
-    if word_count == {}:
-        word_count = {word: 0 for word in word_list}
-
-    for title in hot_l:
-        split_words = title.split(' ')
-        for word in word_list:
-            for s_word in split_words:
-                if s_word.lower() == word.lower():
-                    word_count[word] += 1
-
-    if not info.get("data").get("after"):
-        sorted_counts = sorted(word_count.items(), key=lambda kv: kv[0])
-        sorted_counts = sorted(word_count.items(),
-                               key=lambda kv: kv[1], reverse=True)
-        [print('{}: {}'.format(k, v)) for k, v in sorted_counts if v != 0]
+def count_words(subreddit, word_list):
+    global hotlist
+    global after
+    """subs"""
+    head = {'User-Agent': 'Dan Kazam'}
+    if after:
+        count = get('https://www.reddit.com/r/{}/hot.json?after={}'.format(
+            subreddit, after), headers=head).json().get('data')
     else:
-        return count_words(subreddit, word_list, word_count,
-                           info.get("data").get("after"))
+        count = get('https://www.reddit.com/r/{}/hot.json'.format(
+            subreddit), headers=head).json().get('data')
+    hotlist += [dic.get('data').get('title').lower()
+                for dic in count.get('children')]
+    after = count.get('after')
+    if after:
+        return count_words(subreddit, word_list)
+    return count_all(hotlist, word_list)
+
+
+if __name__ == "__main__":
+    count_words(argv[1], argv[2].split(' '))
