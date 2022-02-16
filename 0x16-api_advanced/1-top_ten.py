@@ -8,12 +8,12 @@ import requests
 
 def top_ten(subreddit):
     """
-    This function queries the Reddit API and prints the titles of
-    the first 10 hot posts listed for a given subreddit
+    function that queries the Reddit API and prints the titles
+    of the top 10 popular posts listed for a given subreddit.
     """
-    URL = 'https://www.reddit.com/r/{}/hot/.json?limit=10'.format(subreddit)
-    headers = {'User-agent': 'URL'}
-    req = requests.get(URL, headers=headers, allow_redirects=False).json()
+    url = 'https://www.reddit.com/r/{}/hot/.json?limit=10'.format(subreddit)
+    req = requests.get(URL, headers={'User-agent': 'url'},
+                       allow_redirects=False).json()
     try:
         lists = req.get('data').get('children')
         for i in lists:
