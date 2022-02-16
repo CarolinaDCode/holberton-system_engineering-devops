@@ -13,7 +13,7 @@ def number_of_subscribers(subreddit):
     subscribers of the reddit API
     """
     url = 'https://www.reddit.com/r/{}/about/.json'.format(subreddit)
-    req = requests.get(url, headers={'User-agent': 'url'},
+    req = requests.get(url, headers={'User-agent': 'request'},
                        allow_redirects=False).json()
     try:
         return (req.get('data').get('subscribers'))
