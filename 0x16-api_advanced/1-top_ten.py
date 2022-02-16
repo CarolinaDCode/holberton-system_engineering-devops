@@ -12,7 +12,7 @@ def top_ten(subreddit):
     of the top 10 popular posts listed for a given subreddit.
     """
     url = 'https://www.reddit.com/r/{}/hot/.json?limit=10'.format(subreddit)
-    req = requests.get(URL, headers={'User-agent': 'url'},
+    req = requests.get(url, headers={'User-agent': 'url'},
                        allow_redirects=False).json()
     try:
         lists = req.get('data').get('children')
