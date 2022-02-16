@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """
-How many subs?
+Write a function that queries the Reddit API and
+returns the number of subscribers 
 """
 import json
 import requests
@@ -8,8 +9,8 @@ import requests
 
 def number_of_subscribers(subreddit):
     """
-    This function queries the Reddit API and
-    returns the number of subscribers for a given subreddit
+    function that performs a request that
+    retrieves the number of subscriberst
     """
     url = 'https://www.reddit.com/r/{}/about/.json'.format(subreddit)
     req = requests.get(url, headers={'User-agent': 'url'},
