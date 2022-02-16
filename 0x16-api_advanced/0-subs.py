@@ -13,8 +13,8 @@ def number_of_subscribers(subreddit):
     retrieves the number of subscriberst
     """
     url = 'https://www.reddit.com/r/{}/about/.json'.format(subreddit)
-    req = requests.get(url, headers={'User-agent': 'url'},
-                       allow_redirects=False).json()
+    headers = {'User-agent': 'Chrome/98.0.4758.102'}
+    req = requests.get(url, headers=headers, allow_redirects=False).json()
     try:
         return (req.get('data').get('subscribers'))
     except:
